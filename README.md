@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Developers
 
-Adamov, Delyukov, Gorbunvov, Soldatova
+Adamov, Delyukov, Gorbunov, Soldatova
 
 ## Getting Started
 
