@@ -20,11 +20,6 @@ class _HomePageState extends State<HomePage> {
     futureFilms = FilmService().getFilms();
   }
 
-  loadFilms() async {
-    final results = await FilmService().getFilms();
-    print(results.length);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
