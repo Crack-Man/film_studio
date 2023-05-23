@@ -2,6 +2,10 @@
 
 A new Flutter project.
 
+## Developers
+
+Adamov, Delyukov, Gorbunov, Soldatova
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
