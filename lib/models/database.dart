@@ -3,32 +3,46 @@ import '../api/film_api.dart';
 import 'film.dart';
 
 Future<void> addFilm(FilmApi apiFilm) async {
-  var hiveBox = await Hive.openBox('films');
-
-  await hiveBox.add(Film.fromApi(apiFilm));
-  await hiveBox.close();
+  var box = await Hive.openBox('films');
+  var films = box.get("filmsData", defaultValue: <Film>[]);
+  films.add(Film.fromApi(apiFilm));
+  await box.put("filmsData", films);
+  await box.close();
 }
 
-Future<Film?> getFilmById(int id) async {
-  var hiveBox = await Hive.openBox('films');
+Future<Film?> getFilmById(num id) async {
+  var box = await Hive.openBox('films');
 
-  for (var i = 0; i < hiveBox.length; i++) {
-    var film = hiveBox.getAt(i);
-    if (film?.id == id) {
-      return film;
+  var films = box.get("filmsData", defaultValue: <Film>[]);
+  if (films != null) {
+    for (var i = 0; i < films.length; i++) {
+      if (films[i].id == id) {
+        return films[i];
+      }
     }
   }
 
   var apiFilm = await FilmService().getFilmById(id);
-  if (hiveBox.length < 20) {
-    await hiveBox.close();
+  if (films.length < await getMaxNumberOfFilms()) {
+    await box.close();
     await addFilm(apiFilm);
   }
 
   return Film.fromApi(apiFilm);
 }
 
-int countFilms() {
-  var hiveBox = Hive.box<Film>('films');
-  return hiveBox.length;
+Future<void> setMaxNumberOfFilms(num number) async {
+  var box = await Hive.openBox('films');
+  await box.put("maxNumberOfFilms", number);
+}
+
+Future<num> getMaxNumberOfFilms() async {
+  var box = await Hive.openBox('films');
+  num number = box.get("maxNumberOfFilms", defaultValue: 100);
+  return number;
+}
+
+num countFilms() {
+  var box = Hive.box<Film>('films');
+  return box.length;
 }

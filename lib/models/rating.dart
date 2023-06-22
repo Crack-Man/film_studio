@@ -13,11 +13,11 @@ class Rating {
   }
 
   @HiveField(0)
-  double kp;
+  num kp;
 
   @HiveField(1)
-  double imdb;
+  num imdb;
 
   @HiveField(2)
-  double tmdb;
+  num tmdb;
 }

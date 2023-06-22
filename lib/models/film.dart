@@ -22,14 +22,14 @@ class Film {
 
   factory Film.fromApi(FilmApi apiFilm) {
     List<Genre> genres = [];
-    for (int i = 0; i < apiFilm.genres.length; i++) {
+    for (var i = 0; i < apiFilm.genres.length; i++) {
       genres.add(Genre.fromApi(apiFilm.genres[i]));
     }
     return Film(id: apiFilm.id, name: apiFilm.name, description: apiFilm.description, year: apiFilm.year, rating: Rating.fromApi(apiFilm.rating), poster: apiFilm.poster, logo: apiFilm.logo, genres: genres, movieLength: apiFilm.movieLength, ageRating: apiFilm.ageRating);
   }
 
   @HiveField(0)
-  int id;
+  num id;
 
   @HiveField(1)
   String name;
@@ -38,7 +38,7 @@ class Film {
   String description;
 
   @HiveField(3)
-  int year;
+  num year;
 
   @HiveField(4)
   Rating rating;
@@ -53,8 +53,8 @@ class Film {
   List<Genre> genres;
 
   @HiveField(8)
-  int movieLength;
+  num movieLength;
 
   @HiveField(9)
-  int ageRating;
+  num ageRating;
 }

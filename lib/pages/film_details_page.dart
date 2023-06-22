@@ -1,11 +1,10 @@
-import 'package:film_studio/api/film_api.dart';
 import 'package:flutter/material.dart';
 
 import '../models/database.dart';
 import '../models/film.dart';
 
 class FilmDetailsPage extends StatefulWidget {
-  final int id;
+  final num id;
 
   FilmDetailsPage(this.id, {Key? key}) : super(key: key);
 
