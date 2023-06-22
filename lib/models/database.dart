@@ -10,7 +10,7 @@ Future<void> addFilm(FilmApi apiFilm) async {
   await box.close();
 }
 
-Future<Film?> getFilmById(int id) async {
+Future<Film?> getFilmById(num id) async {
   var box = await Hive.openBox('films');
 
   var films = box.get("filmsData", defaultValue: <Film>[]);
@@ -31,18 +31,18 @@ Future<Film?> getFilmById(int id) async {
   return Film.fromApi(apiFilm);
 }
 
-Future<void> setMaxNumberOfFilms(int number) async {
+Future<void> setMaxNumberOfFilms(num number) async {
   var box = await Hive.openBox('films');
   await box.put("maxNumberOfFilms", number);
 }
 
-Future<int> getMaxNumberOfFilms() async {
+Future<num> getMaxNumberOfFilms() async {
   var box = await Hive.openBox('films');
-  int number = box.get("maxNumberOfFilms", defaultValue: 100);
+  num number = box.get("maxNumberOfFilms", defaultValue: 100);
   return number;
 }
 
-int countFilms() {
+num countFilms() {
   var box = Hive.box<Film>('films');
   return box.length;
 }

@@ -6,16 +6,16 @@ import 'package:film_studio/config/config.dart';
 import 'genre_api.dart';
 
 class FilmApi {
-  final int id;
+  final num id;
   final String name;
   final String description;
-  final int year;
+  final num year;
   final RatingApi rating;
   final String poster;
   final String logo;
   final List<GenreApi> genres;
-  final int movieLength;
-  final int ageRating;
+  final num movieLength;
+  final num ageRating;
 
   const FilmApi(
       {required this.id,
@@ -51,7 +51,7 @@ class FilmService {
         'X-API-KEY': AppConfig.apiKey
       };
 
-  Future<List<FilmApi>> getFilms(int num) async {
+  Future<List<FilmApi>> getFilms(num num) async {
     final response = await http.get(
         Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$num"),
         headers: requestHeaders);
@@ -68,7 +68,7 @@ class FilmService {
     }
   }
 
-  Future<FilmApi> getFilmById(int id) async {
+  Future<FilmApi> getFilmById(num id) async {
     final response = await http.get(
         Uri.parse("https://api.kinopoisk.dev/v1.3/movie/$id"),
         headers: requestHeaders);

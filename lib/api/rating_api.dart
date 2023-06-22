@@ -1,7 +1,7 @@
 class RatingApi {
-  final double kp;
-  final double imdb;
-  final double tmdb;
+  final num kp;
+  final num imdb;
+  final num tmdb;
 
   const RatingApi({
     required this.kp,

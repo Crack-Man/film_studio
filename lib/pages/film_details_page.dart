@@ -5,7 +5,7 @@ import '../models/database.dart';
 import '../models/film.dart';
 
 class FilmDetailsPage extends StatefulWidget {
-  final int id;
+  final num id;
 
   FilmDetailsPage(this.id, {Key? key}) : super(key: key);
 
