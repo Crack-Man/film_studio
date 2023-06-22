@@ -1,3 +1,4 @@
+import 'package:film_studio/models/database.dart';
 import 'package:film_studio/models/film.dart';
 import 'package:film_studio/models/genre.dart';
 import 'package:film_studio/models/rating.dart';
