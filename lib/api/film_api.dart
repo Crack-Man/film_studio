@@ -1,55 +1,23 @@
+import 'package:film_studio/api/rating_api.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:film_studio/config/config.dart';
 
-class Rating {
-  final double kp;
-  final double imdb;
-  final double tmdb;
+import 'genre_api.dart';
 
-  const Rating({
-    required this.kp,
-    required this.imdb,
-    required this.tmdb,
-  });
-
-  factory Rating.fromJson(Map<String, dynamic> json) {
-    return Rating(
-        kp: json['kp'] ?? 0, imdb: json['imdb'] ?? 0, tmdb: json['tmdb'] ?? 0);
-  }
-}
-
-class Genre {
-  final String name;
-
-  const Genre({required this.name});
-
-  static List<Genre> fromArray(List<dynamic> array) {
-    final List<Genre> genres = [];
-    for (int i = 0; i < array.length; i++) {
-      genres.add(Genre.fromJson(array[i]));
-    }
-    return genres;
-  }
-
-  factory Genre.fromJson(Map<String, dynamic> json) {
-    return Genre(name: json['name']);
-  }
-}
-
-class Film {
+class FilmApi {
   final int id;
   final String name;
   final String description;
   final int year;
-  final Rating rating;
+  final RatingApi rating;
   final String poster;
   final String logo;
-  final List<Genre> genres;
+  final List<GenreApi> genres;
   final int movieLength;
   final int ageRating;
 
-  const Film(
+  const FilmApi(
       {required this.id,
       required this.name,
       required this.description,
@@ -61,16 +29,16 @@ class Film {
       required this.movieLength,
       required this.ageRating});
 
-  factory Film.fromJson(Map<String, dynamic> json) {
-    return Film(
+  factory FilmApi.fromJson(Map<String, dynamic> json) {
+    return FilmApi(
       id: json['id'],
       name: json['name'],
       description: json['description'],
       year: json['year'],
-      rating: Rating.fromJson(json['rating']),
+      rating: RatingApi.fromJson(json['rating']),
       poster: json["poster"]["url"],
       logo: json["logo"]["url"],
-      genres: Genre.fromArray(json["genres"]),
+      genres: GenreApi.fromArray(json["genres"]),
       movieLength: json["movieLength"] ?? -1,
       ageRating: json["ageRating"] ?? -1,
     );
@@ -83,16 +51,16 @@ class FilmService {
         'X-API-KEY': AppConfig.apiKey
       };
 
-  Future<List<Film>> getFilms(int num) async {
+  Future<List<FilmApi>> getFilms(int num) async {
     final response = await http.get(
         Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$num"),
         headers: requestHeaders);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      final List<Film> films = [];
+      final List<FilmApi> films = [];
       for (var i = 0; i < data['docs'].length; i++) {
         final entry = data['docs'][i];
-        films.add(Film.fromJson(entry));
+        films.add(FilmApi.fromJson(entry));
       }
       return films;
     } else {
@@ -100,13 +68,13 @@ class FilmService {
     }
   }
 
-  Future<Film> getFilmById(int id) async {
+  Future<FilmApi> getFilmById(int id) async {
     final response = await http.get(
         Uri.parse("https://api.kinopoisk.dev/v1.3/movie/$id"),
         headers: requestHeaders);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return Film.fromJson(data);
+      return FilmApi.fromJson(data);
     } else {
       throw Exception('HTTP Failed');
     }
