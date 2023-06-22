@@ -1,7 +1,16 @@
+import 'package:film_studio/models/database.dart';
+import 'package:film_studio/models/film.dart';
+import 'package:film_studio/models/genre.dart';
+import 'package:film_studio/models/rating.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'pages/home_page.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(FilmAdapter());
+  Hive.registerAdapter(RatingAdapter());
+  Hive.registerAdapter(GenreAdapter());
   runApp(const MyApp());
 }
 
