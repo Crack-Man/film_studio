@@ -23,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(title: const Text("Home page")),
         body: Center(
           child: FutureBuilder<List<FilmApi>>(
             future: futureFilms,
@@ -75,7 +76,6 @@ class _HomePageState extends State<HomePage> {
               return const CircularProgressIndicator();
             },
           ),
-        )
-    );
+        ));
   }
 }

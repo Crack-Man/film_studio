@@ -36,6 +36,7 @@ class _FilmDetailsPageState extends State<FilmDetailsPage> {
           return const CircularProgressIndicator();
         },
       )),
+
     );
   }
 }
