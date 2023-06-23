@@ -19,15 +19,15 @@ class FilmApi {
 
   const FilmApi(
       {required this.id,
-        required this.name,
-        required this.description,
-        required this.year,
-        required this.rating,
-        required this.poster,
-        required this.logo,
-        required this.genres,
-        required this.movieLength,
-        required this.ageRating});
+      required this.name,
+      required this.description,
+      required this.year,
+      required this.rating,
+      required this.poster,
+      required this.logo,
+      required this.genres,
+      required this.movieLength,
+      required this.ageRating});
 
   factory FilmApi.fromJson(Map<String, dynamic> json) {
     return FilmApi(
@@ -46,14 +46,17 @@ class FilmApi {
 }
 
 class FilmService {
-  Map<String, String> get requestHeaders => {
-    "Accept": "application/json",
-    'X-API-KEY': AppConfig.apiKey
-  };
+  Map<String, String> get requestHeaders =>
+      {"Accept": "application/json", 'X-API-KEY': AppConfig.apiKey};
 
-  Future<List<FilmApi>> getFilms(num num) async {
+  Future<List<FilmApi>> getFilms(num limit,
+      {List<String> genres = const []}) async {
+    String genresQuery = "";
+    for (var genre in genres) {
+      genresQuery += "&genres.name=$genre";
+    }
     final response = await http.get(
-        Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$num"),
+        Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$limit$genresQuery"),
         headers: requestHeaders);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
