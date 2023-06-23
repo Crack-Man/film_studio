@@ -19,15 +19,15 @@ class FilmApi {
 
   const FilmApi(
       {required this.id,
-      required this.name,
-      required this.description,
-      required this.year,
-      required this.rating,
-      required this.poster,
-      required this.logo,
-      required this.genres,
-      required this.movieLength,
-      required this.ageRating});
+        required this.name,
+        required this.description,
+        required this.year,
+        required this.rating,
+        required this.poster,
+        required this.logo,
+        required this.genres,
+        required this.movieLength,
+        required this.ageRating});
 
   factory FilmApi.fromJson(Map<String, dynamic> json) {
     return FilmApi(
@@ -47,9 +47,9 @@ class FilmApi {
 
 class FilmService {
   Map<String, String> get requestHeaders => {
-        "Accept": "application/json",
-        'X-API-KEY': AppConfig.apiKey
-      };
+    "Accept": "application/json",
+    'X-API-KEY': AppConfig.apiKey
+  };
 
   Future<List<FilmApi>> getFilms(num num) async {
     final response = await http.get(

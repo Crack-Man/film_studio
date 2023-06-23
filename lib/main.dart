@@ -2,9 +2,10 @@ import 'package:film_studio/models/database.dart';
 import 'package:film_studio/models/film.dart';
 import 'package:film_studio/models/genre.dart';
 import 'package:film_studio/models/rating.dart';
+import 'package:film_studio/pages/btmNavBar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'pages/home_page.dart';
+
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      home: HomePage(),
+      home: BtmNavBar(),
     );
   }
 }
