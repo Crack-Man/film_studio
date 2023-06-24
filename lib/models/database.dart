@@ -10,7 +10,7 @@ Future<void> addFilm(FilmApi apiFilm) async {
   await box.close();
 }
 
-Future<Film?> getFilmById(int id) async {
+Future<Film?> getFilmById(num id) async {
   var box = await Hive.openBox('films');
 
   var films = box.get("filmsData", defaultValue: <Film>[]);
