@@ -6,28 +6,28 @@ import 'package:film_studio/config/config.dart';
 import 'genre_api.dart';
 
 class FilmApi {
-  final int id;
+  final num id;
   final String name;
   final String description;
-  final int year;
+  final num year;
   final RatingApi rating;
   final String poster;
   final String logo;
   final List<GenreApi> genres;
-  final int movieLength;
-  final int ageRating;
+  final num movieLength;
+  final num ageRating;
 
   const FilmApi(
       {required this.id,
-      required this.name,
-      required this.description,
-      required this.year,
-      required this.rating,
-      required this.poster,
-      required this.logo,
-      required this.genres,
-      required this.movieLength,
-      required this.ageRating});
+        required this.name,
+        required this.description,
+        required this.year,
+        required this.rating,
+        required this.poster,
+        required this.logo,
+        required this.genres,
+        required this.movieLength,
+        required this.ageRating});
 
   factory FilmApi.fromJson(Map<String, dynamic> json) {
     return FilmApi(
@@ -47,11 +47,11 @@ class FilmApi {
 
 class FilmService {
   Map<String, String> get requestHeaders => {
-        "Accept": "application/json",
-        'X-API-KEY': AppConfig.apiKey
-      };
+    "Accept": "application/json",
+    'X-API-KEY': AppConfig.apiKey
+  };
 
-  Future<List<FilmApi>> getFilms(int num) async {
+  Future<List<FilmApi>> getFilms(num num) async {
     final response = await http.get(
         Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$num"),
         headers: requestHeaders);
@@ -68,7 +68,7 @@ class FilmService {
     }
   }
 
-  Future<FilmApi> getFilmById(int id) async {
+  Future<FilmApi> getFilmById(num id) async {
     final response = await http.get(
         Uri.parse("https://api.kinopoisk.dev/v1.3/movie/$id"),
         headers: requestHeaders);

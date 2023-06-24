@@ -5,7 +5,7 @@ class GenreApi {
 
   static List<GenreApi> fromArray(List<dynamic> array) {
     final List<GenreApi> genres = [];
-    for (int i = 0; i < array.length; i++) {
+    for (var i = 0; i < array.length; i++) {
       genres.add(GenreApi.fromJson(array[i]));
     }
     return genres;
