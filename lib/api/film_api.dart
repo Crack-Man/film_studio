@@ -79,4 +79,27 @@ class FilmService {
       throw Exception('HTTP Failed');
     }
   }
+
+
+  // для реков запрос
+  Future<List<FilmApi>> getActors(String name) async {
+    final response = await http.get(
+        Uri.parse("https://api.kinopoisk.dev/v1/person?page=1&limit=10&name=$name"),
+        headers: requestHeaders);
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final List<FilmApi> actors = [];
+
+      // final idx = data['total'] > 5 ? 5 : data['total'];
+
+      for (var i = 0; i < 2; i++) {
+        final entry = data['docs'][i];
+        actors.add(FilmApi.fromJson(entry));
+      }
+      return actors;
+    } else {
+      throw Exception('HTTP Failed');
+    }
+  }
+
 }
