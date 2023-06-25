@@ -1,3 +1,4 @@
+import 'package:film_studio/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:film_studio/pages/search_page.dart';
@@ -31,7 +32,18 @@ class _BtmNavBarState extends State<BtmNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Home page")),
+      appBar: AppBar(title: const Text("Home page"), actions: <Widget>[
+      IconButton(
+      icon: const Icon(Icons.settings),
+      tooltip: 'Найстройки',
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SettingsScreen()));
+      },
+    ),
+    ],
+    ),
       body: btmNavBarPages.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

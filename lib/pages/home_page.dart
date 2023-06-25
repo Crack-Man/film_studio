@@ -78,4 +78,6 @@ class _HomePageState extends State<HomePage> {
         )
     );
   }
+  @override
+  bool get wantkeepAlive => true;
 }
