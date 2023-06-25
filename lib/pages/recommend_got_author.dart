@@ -1,8 +1,5 @@
 import 'package:film_studio/api/actor_api.dart';
 import 'package:flutter/material.dart';
-// import 'package:film_studio/api/actor_api.dart';
-
-import 'actor_page.dart';
 
 class SearchPage extends StatefulWidget {
   @override

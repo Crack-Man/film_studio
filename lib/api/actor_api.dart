@@ -1,4 +1,3 @@
-import 'package:film_studio/api/rating_api.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:film_studio/config/config.dart';
@@ -14,13 +13,14 @@ class ActorApi {
   const ActorApi(
       {required this.id,
         required this.name,
-        required this.movies});
+        required this.movies
+      });
 
   factory ActorApi.fromJson(Map<String, dynamic> json) {
     return ActorApi(
-      id: json['id'],
-      name: json['name'],
-      movies: json['movies'],
+      id: json['id'] ?? "",
+      name: json['name'] ?? "",
+      movies: json['movies'] ?? "",
     );
   }
 }
@@ -31,40 +31,15 @@ class ActorService {
     'X-API-KEY': AppConfig.apiKey
   };
 
-  // Future<List<ActorApi>> getFilms(num num) async {
-  //   final response = await http.get(
-  //       Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$num"),
-  //       headers: requestHeaders);
-  //   if (response.statusCode == 200) {
-  //     final data = jsonDecode(response.body);
-  //     final List<ActorApi> films = [];
-  //     for (var i = 0; i < data['docs'].length; i++) {
-  //       final entry = data['docs'][i];
-  //       films.add(ActorApi.fromJson(entry));
-  //     }
-  //     return films;
-  //   } else {
-  //     throw Exception('HTTP Failed');
-  //   }
-  // }
-
-  // Future<ActorApi> getFilmById(num id) async {
-  //   final response = await http.get(
-  //       Uri.parse("https://api.kinopoisk.dev/v1.3/movie/$id"),
-  //       headers: requestHeaders);
-  //   if (response.statusCode == 200) {
-  //     final data = jsonDecode(response.body);
-  //     return ActorApi.fromJson(data);
-  //   } else {
-  //     throw Exception('HTTP Failed');
-  //   }
-  // }
-
 
   // для реков запрос
   Future<List<ActorApi>> getActors(String name) async {
+    Map<String, String> queryParameters = {
+      "name": name,
+    };
+    String queryString = Uri(queryParameters: queryParameters).query;
     final response = await http.get(
-        Uri.parse("https://api.kinopoisk.dev/v1/person?page=1&limit=10&name=$name"),
+        Uri.parse("https://api.kinopoisk.dev/v1/person?$queryString"),
         headers: requestHeaders);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);

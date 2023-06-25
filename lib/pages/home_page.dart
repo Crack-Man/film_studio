@@ -1,3 +1,4 @@
+import 'package:film_studio/api/actor_api.dart';
 import 'package:flutter/material.dart';
 import 'package:film_studio/api/film_api.dart';
 
@@ -14,10 +15,17 @@ class _HomePageState extends State<HomePage> {
   late Future<List<FilmApi>> futureFilms;
   late Future<FilmApi> film;
 
+  void printActors() async {
+    var actors = await ActorService().getActors("Антон");
+    print(actors[0].name);
+    print(actors[0].movies);
+  }
+
   @override
   void initState() {
     super.initState();
     futureFilms = FilmService().getFilms(20);
+    printActors();
   }
 
   @override
