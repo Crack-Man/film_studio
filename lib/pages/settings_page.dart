@@ -1,37 +1,51 @@
-import 'package:film_studio/settings/amount_of_data.dart';
 import 'package:flutter/material.dart';
 
 import 'package:settings_ui/settings_ui.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreen();
+}
+
+class _SettingsScreen extends State<SettingsScreen> {
+  double _currentSliderPrimaryValue = 0.2;
+  double _currentSliderSecondaryValue = 0.5;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Home page")),
       body: SettingsList(
         sections: [
           SettingsSection(
-            title: const Text('Common'),
             tiles: <SettingsTile>[
               SettingsTile.navigation(
                 title: const Text('Сбросить рекомендации'),
-                onPressed: (context) => _showResetRecommendationsDialog(context),
+                onPressed: (context) =>
+                    _showResetRecommendationsDialog(context),
               ),
               SettingsTile.navigation(
                 title: const Text('Очистить кэш'),
                 onPressed: (context) => _showResetCashDialog(context),
               ),
-              SettingsTile.navigation(
+              SettingsTile(
                 title: const Text('Установить количество хранимых данных'),
-                onPressed: (context) => {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const AmountOfDataStored()))
-                },
               ),
             ],
           ),
+          CustomSettingsSection(
+              child: Slider(
+            value: _currentSliderPrimaryValue,
+            secondaryTrackValue: _currentSliderSecondaryValue,
+            label: _currentSliderPrimaryValue.round().toString(),
+            onChanged: (double value) {
+              setState(() {
+                _currentSliderPrimaryValue = value;
+              });
+            },
+          ))
         ],
       ),
     );
