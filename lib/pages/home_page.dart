@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return const Divider(color: Colors.black26);
+                      return const Divider(color: Colors.white);
                     },
                     itemCount: snapshot.data!.length);
               } else if (snapshot.hasError) {
@@ -78,6 +78,6 @@ class _HomePageState extends State<HomePage> {
         )
     );
   }
-  @override
-  bool get wantkeepAlive => true;
+  // @override
+  // bool get wantkeepAlive => true;
 }

@@ -1,4 +1,3 @@
-import 'package:film_studio/models/database.dart';
 import 'package:film_studio/models/film.dart';
 import 'package:film_studio/models/genre.dart';
 import 'package:film_studio/models/rating.dart';
@@ -25,7 +24,8 @@ class MyApp extends StatelessWidget {
       title: 'MovApp',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.blueGrey,
+        scaffoldBackgroundColor: Colors.black,
+        // appBarTheme: Colors.lightGreen,
         primaryTextTheme: Typography(platform: TargetPlatform.iOS).white,
         textTheme: Typography(platform: TargetPlatform.iOS).white,
         // This is the theme of your application.
