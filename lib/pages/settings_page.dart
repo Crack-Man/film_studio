@@ -1,3 +1,4 @@
+import 'package:film_studio/models/database.dart';
 import 'package:flutter/material.dart';
 
 import 'package:settings_ui/settings_ui.dart';
@@ -10,7 +11,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreen extends State<SettingsScreen> {
-  double _currentSliderPrimaryValue = 100;
+  late Future<num> _currentSliderPrimaryValue = getMaxNumberOfFilms();
   // double _currentSliderSecondaryValue = 0.5;
 
   @override
@@ -20,44 +21,55 @@ class _SettingsScreen extends State<SettingsScreen> {
       body: Stack(
         children: [
           Container(height: double.infinity, color: Colors.black),
-          SettingsList(
-            sections: [
-              SettingsSection(
-                tiles: <SettingsTile>[
-                  SettingsTile.navigation(
-                    title: const Text('Сбросить рекомендации'),
-                    onPressed: (context) =>
-                        _showResetRecommendationsDialog(context),
-                  ),
-                  SettingsTile.navigation(
-                    title: const Text('Очистить кэш'),
-                    onPressed: (context) => _showResetCashDialog(context),
-                  ),
-                  SettingsTile(
-                    title: const Text('Установить количество хранимых данных'),
-                    value: Text('Текущее количество хранимых данных ${_currentSliderPrimaryValue}'),
-                  ),
-                ],
-              ),
-              CustomSettingsSection(
-                  child: Slider(
-                    value: _currentSliderPrimaryValue,
-                    max: 1000,
-                    // min: 100,
-                    divisions: 20,
-                    // secondaryTrackValue: _currentSliderSecondaryValue,
-                    label: _currentSliderPrimaryValue.round().toString(),
-                    onChanged: (double value) {
-                      setState(() {
-                        _currentSliderPrimaryValue = value;
-                      });
-                    },
-                  )
-              )
-            ],
+          FutureBuilder<num>(
+            future: _currentSliderPrimaryValue,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                double? value = snapshot.data as double?;
+                return SettingsList(
+                  sections: [
+                    SettingsSection(
+                      tiles: <SettingsTile>[
+                        SettingsTile.navigation(
+                          title: const Text('Сбросить рекомендации'),
+                          onPressed: (context) =>
+                              _showResetRecommendationsDialog(context),
+                        ),
+                        SettingsTile.navigation(
+                          title: const Text('Очистить кэш'),
+                          onPressed: (context) => _showResetCashDialog(context),
+                        ),
+                        SettingsTile(
+                          title: const Text('Установить количество хранимых данных'),
+                          value: Text(
+                              'Текущее количество хранимых данных ${value}'),
+                        ),
+                      ],
+                    ),
+                    CustomSettingsSection(
+                      child: Slider(
+                        value: value ?? 100,
+                        max: 1000,
+                        min: 10,
+                        divisions: 99,
+                        label: (snapshot.data ?? 0).round().toString(),
+                        onChanged: (double value) {
+                          setState(() {
+                            setMaxNumberOfFilms(value);
+                            _currentSliderPrimaryValue = Future.value(value);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              } else if (snapshot.hasError) {
+                return Text('Ошибка: ${snapshot.error}');
+              }
+              return CircularProgressIndicator();
+            },
           ),
-        ]
-
+        ],
       ),
     );
   }
@@ -106,6 +118,7 @@ void _showResetCashDialog(BuildContext context) {
           TextButton(
             child: const Text("Очистить кэш", style: TextStyle(color: Colors.black)),
             onPressed: () {
+              clearFilms();
               Navigator.of(context).pop();
             },
           ),
