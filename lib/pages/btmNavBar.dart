@@ -1,10 +1,11 @@
-import 'package:film_studio/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:film_studio/pages/search_page.dart';
 import 'package:page_transition/page_transition.dart';
 import 'home_page.dart';
-import 'recommend_page_start.dart';
+import 'recommend_page.dart';
+
+
 
 class BtmNavBar extends StatefulWidget {
   BtmNavBar({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _BtmNavBarState extends State<BtmNavBar> {
   final btmNavBarPages = [
     HomePage(),
     SearchScreen(),
-    SurveyPage(),
+    RecommendPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -32,11 +33,11 @@ class _BtmNavBarState extends State<BtmNavBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home page"),
+        title: const Text("MovApp"),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),
-            tooltip: 'Найстройки',
+            tooltip: 'Настройки',
             onPressed: () {
               Navigator.push(
                   context,

@@ -1,4 +1,3 @@
-import 'package:film_studio/models/genre.dart';
 import 'package:flutter/material.dart';
 
 import '../models/database.dart';
@@ -21,24 +20,6 @@ class _FilmDetailsPageState extends State<FilmDetailsPage> {
     super.initState();
     filmFuture = getFilmById(widget.id);
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     appBar: AppBar(title: FutureBuilder<Film?>(
-  //       future: filmFuture,
-  //       builder: (context, AsyncSnapshot<Film?> snapshot) {
-  //         if (snapshot.hasData) {
-  //           Film film = snapshot.data!;
-  //           return Text(film.name);
-  //         } else if (snapshot.hasError) {
-  //           return Text('ERROR: ${snapshot.error}');
-  //         }
-  //         return const CircularProgressIndicator();
-  //       },
-  //     )),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
