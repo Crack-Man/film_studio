@@ -50,12 +50,6 @@ Future<void> setMaxNumberOfFilms(num number) async {
   await box.close();
 }
 
-Future<int> getMaxNumberOfFilms() async {
-  var box = await Hive.openBox('films');
-  int number = box.get("maxNumberOfFilms", defaultValue: 100);
-  return number;
-}
-
 Future<num> getMaxNumberOfFilms() async {
   var box = await Hive.openBox('films');
   num number = box.get("maxNumberOfFilms", defaultValue: 100);
@@ -67,7 +61,4 @@ Future<void> clearFilms() async {
   var box = await Hive.openBox('films');
   await box.delete('filmsData');
   await box.close();
-int countFilms() {
-  var box = Hive.box<Film>('films');
-  return box.length;
 }

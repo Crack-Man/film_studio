@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:film_studio/pages/settings_page.dart';
 
 import 'package:film_studio/pages/search_page.dart';
 import 'package:page_transition/page_transition.dart';
 import 'home_page.dart';
-import 'recommend_page.dart';
+import 'recommend_page_start.dart';
 
 
 
@@ -19,8 +20,8 @@ class _BtmNavBarState extends State<BtmNavBar> {
 
   final btmNavBarPages = [
     HomePage(),
-    SearchScreen(),
-    RecommendPage(),
+    const SearchScreen(),
+    SurveyPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -43,7 +44,7 @@ class _BtmNavBarState extends State<BtmNavBar> {
                   context,
                   PageTransition(
                       type: PageTransitionType.topToBottom,
-                      child: SettingsScreen()));
+                      child: const SettingsScreen()));
             },
           ),
         ],
