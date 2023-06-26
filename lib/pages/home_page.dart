@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
                         subtitle: Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
-                            film.description,
+                            '${film.year} г. | Жанр: ${capitalize(film.genres[0].name)}',
                             softWrap: true,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -79,4 +79,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   bool get wantkeepAlive => true;
+}
+
+String capitalize(String value) {
+  var result = value[0].toUpperCase();
+  bool cap = true;
+  for (int i = 1; i < value.length; i++) {
+    if (value[i - 1] == " " && cap == true) {
+      result = result + value[i].toUpperCase();
+    } else {
+      result = result + value[i];
+      cap = false;
+    }
+  }
+  return result;
 }
