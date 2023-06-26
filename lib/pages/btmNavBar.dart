@@ -1,10 +1,10 @@
+import 'package:film_studio/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:film_studio/pages/search_page.dart';
+import 'package:page_transition/page_transition.dart';
 import 'home_page.dart';
 import 'recommend_page_start.dart';
-
-
 
 class BtmNavBar extends StatefulWidget {
   BtmNavBar({Key? key}) : super(key: key);
@@ -31,7 +31,22 @@ class _BtmNavBarState extends State<BtmNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Home page")),
+      appBar: AppBar(
+        title: const Text("Home page"),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Найстройки',
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.topToBottom,
+                      child: SettingsScreen()));
+            },
+          ),
+        ],
+      ),
       body: btmNavBarPages.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
