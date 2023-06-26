@@ -19,9 +19,6 @@ class _SurveyPageState extends State<SurveyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // title: Text('Survey Page'),
-      ),
       body: Column(
         children: <Widget>[
           Padding(
