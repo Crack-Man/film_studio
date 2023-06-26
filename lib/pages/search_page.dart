@@ -40,26 +40,29 @@ class _SearchScreen extends State<SearchScreen> {
     return Scaffold(
       body: Column(children: [
         Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(top: 20.0, left:10, right: 10),
             child: TextField(
               controller: _controller,
-              decoration: const InputDecoration(
-                labelText: 'Поиск',
+              decoration: InputDecoration(
+                hintText: 'Поиск',
+                // border: OutlineInputBorder(
+                // ),
                 filled: true,
                 fillColor: Colors.white,
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.white, // Set the desired border color
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: const BorderSide(
+                    color: Colors.black, // Set the desired border color
                   ),
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     color: Colors.white, // Set the desired focused border color
                   ),
                 ),
               ),
               style: const TextStyle(
-                color: Colors.white, // Set the desired text color
+                color: Colors.black, // Set the desired text color
               ),
               onSubmitted: (String value) async {
                 print(value);
@@ -73,7 +76,7 @@ class _SearchScreen extends State<SearchScreen> {
             print("object!!!!!!!!!!!");
             print(snapshot);
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
+              return const Center(child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator()));
             } else if (snapshot.hasError) {
               return Text('ERROR: ${snapshot.error}');
             } else if (snapshot.data == null || !snapshot.data.isNotEmpty) {
