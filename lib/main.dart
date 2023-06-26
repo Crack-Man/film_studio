@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'MovApp',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: Colors.blueGrey,
         primaryTextTheme: Typography(platform: TargetPlatform.iOS).white,
         textTheme: Typography(platform: TargetPlatform.iOS).white,
         // This is the theme of your application.
@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.orange,
+        primarySwatch: Colors.indigo,
+
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: BtmNavBar(),
