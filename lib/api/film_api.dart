@@ -51,9 +51,20 @@ class FilmService {
     'X-API-KEY': AppConfig.apiKey
   };
 
-  Future<List<FilmApi>> getFilms(num num) async {
+  Future<List<FilmApi>> getFilms(num limit,
+      {List<String> genres = const []}) async {
+    Map<String, String> queryParameters = {
+      "limit": limit.toString(),
+      "page": 1.toString(),
+    };
+    if (genres.isNotEmpty) {
+      queryParameters["genres"] = jsonEncode(genres);
+    }
+    String queryString = Uri(queryParameters: queryParameters).query;
+    print(queryString);
     final response = await http.get(
-        Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$num"),
+        Uri.parse(
+            "https://api.kinopoisk.dev/v1.3/movie?$queryString"),
         headers: requestHeaders);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
