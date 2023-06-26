@@ -24,7 +24,13 @@ class MyApp extends StatelessWidget {
       title: 'MovApp',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Colors.grey.shade900, foregroundColor: Colors.white),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.grey.shade900,
+            selectedItemColor: Colors.blueAccent,
+            unselectedItemColor: Colors.white),
         scaffoldBackgroundColor: Colors.black,
+        // primaryColor: Colors.black26,
         // appBarTheme: Colors.lightGreen,
         primaryTextTheme: Typography(platform: TargetPlatform.iOS).white,
         textTheme: Typography(platform: TargetPlatform.iOS).white,
