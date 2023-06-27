@@ -19,25 +19,43 @@ class FilmApi {
 
   const FilmApi(
       {required this.id,
-        required this.name,
-        required this.description,
-        required this.year,
-        required this.rating,
-        required this.poster,
-        required this.logo,
-        required this.genres,
-        required this.movieLength,
-        required this.ageRating});
+      required this.name,
+      required this.description,
+      required this.year,
+      required this.rating,
+      required this.poster,
+      required this.logo,
+      required this.genres,
+      required this.movieLength,
+      required this.ageRating});
 
   factory FilmApi.fromJson(Map<String, dynamic> json) {
+    String posterURL = "";
+    String logoURL = "";
+    String notFoundURL = "https://specialplantzundert.nl/wp-content/uploads/2020/06/not-found-image-15383864787lu.jpg";
+    if (json["poster"] == null) {
+      posterURL = notFoundURL;
+    } else {
+      posterURL = json["poster"]["url"] ?? notFoundURL;
+    }
+    if (json["logo"] == null) {
+      logoURL = notFoundURL;
+    } else {
+      logoURL = json["logo"]["url"] ?? notFoundURL;
+    }
     return FilmApi(
       id: json['id'],
-      name: json['name'],
-      description: json['description'],
+      name: json['name'] ?? "",
+      description: json['description'] ?? "",
       year: json['year'],
       rating: RatingApi.fromJson(json['rating']),
-      poster: json["poster"]["url"],
-      logo: json["logo"]["url"],
+<<<<<<<<< Temporary merge branch 1
+      poster: posterURL,
+      logo: logoURL,
+=========
+      poster: json["poster"]["url"] ?? "",
+      logo: json["logo"]["url"] ?? "",
+>>>>>>>>> Temporary merge branch 2
       genres: GenreApi.fromArray(json["genres"]),
       movieLength: json["movieLength"] ?? -1,
       ageRating: json["ageRating"] ?? -1,
@@ -51,17 +69,33 @@ class FilmService {
     'X-API-KEY': AppConfig.apiKey
   };
 
-  Future<List<FilmApi>> getFilms(num num) async {
+  Future<List<FilmApi>> getFilms(num limit,
+      {List<String> genres = const [], String name = ""}) async {
+    Map<String, String> queryParameters = {
+      "limit": limit.toString(),
+      "page": 1.toString(),
+    };
+    if (genres.isNotEmpty) {
+      queryParameters["genres"] = jsonEncode(genres);
+    }
+    if (name.isNotEmpty) {
+      queryParameters["name"] = name;
+    }
+    String queryString = Uri(queryParameters: queryParameters).query;
     final response = await http.get(
-        Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=$num"),
+        Uri.parse(
+            "https://api.kinopoisk.dev/v1.3/movie?$queryString"),
         headers: requestHeaders);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
+      print(data);
       final List<FilmApi> films = [];
       for (var i = 0; i < data['docs'].length; i++) {
         final entry = data['docs'][i];
+        print(entry);
         films.add(FilmApi.fromJson(entry));
       }
+      print(films.length);
       return films;
     } else {
       throw Exception('HTTP Failed');
@@ -90,9 +124,9 @@ class FilmService {
       final data = jsonDecode(response.body);
       final List<FilmApi> actors = [];
 
-      // final idx = data['total'] > 5 ? 5 : data['total'];
+      final idx = data['total'] > 4 ? 4 : data['total'];
 
-      for (var i = 0; i < 2; i++) {
+      for (var i = 0; i < idx; i++) {
         final entry = data['docs'][i];
         actors.add(FilmApi.fromJson(entry));
       }

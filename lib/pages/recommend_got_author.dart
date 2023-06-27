@@ -1,14 +1,10 @@
 import 'package:film_studio/api/actor_api.dart';
-import 'package:film_studio/pages/recommend_got_film.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
   @override
   _SearchPageState createState() => _SearchPageState();
 }
-
-num best_actor = 0; /////////////////////////////////////////////////////////////////////////////////////
-
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
@@ -19,7 +15,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    futureActors = ActorService().getActors('Леонардо ди');
+    futureActors = ActorService().getActors('пол');
   }
 
   @override
@@ -48,7 +44,7 @@ class _SearchPageState extends State<SearchPage> {
                   _searchText = text;
                   // futureActors = FilmService().getFilms(10);
 
-                  futureActors = ActorService().getActors(_searchText);
+                  // futureActors = FilmService().getActors(_searchText);
 
                   // print(futureActors);
                 });
@@ -66,16 +62,6 @@ class _SearchPageState extends State<SearchPage> {
                         return InkWell(
                             child: ListTile(
                               title: Text(film.name),
-                              onTap: (){
-                                best_actor = film.id;
-                                print(film.id);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => GetFilm()),
-                                );
-                                // print(film.name);
-
-                              },
                               // subtitle: Padding(
                               //   padding: const EdgeInsets.only(top: 8.0),
                               //   child: Text(
