@@ -17,16 +17,16 @@ class FilmAdapter extends TypeAdapter<Film> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Film(
-      id: fields[0] as int,
+      id: fields[0] as num,
       name: fields[1] as String,
       description: fields[2] as String,
-      year: fields[3] as int,
+      year: fields[3] as num,
       rating: fields[4] as Rating,
       poster: fields[5] as String,
       logo: fields[6] as String,
       genres: (fields[7] as List).cast<Genre>(),
-      movieLength: fields[8] as int,
-      ageRating: fields[9] as int,
+      movieLength: fields[8] as num,
+      ageRating: fields[9] as num,
     );
   }
 

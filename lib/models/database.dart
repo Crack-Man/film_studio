@@ -10,6 +10,18 @@ Future<void> addFilm(FilmApi apiFilm) async {
   await box.close();
 }
 
+Future<void> deleteFirstFilm() async {
+  var box = await Hive.openBox<List<dynamic>>('films');
+  var films = box.get("filmsData", defaultValue: <dynamic>[]);
+  if (films != null && films.isNotEmpty) {
+    var newFilms = films.sublist(1).cast<Film>();
+    await box.put("filmsData", newFilms);
+  }
+  await box.close();
+}
+
+
+
 Future<Film?> getFilmById(num id) async {
   var box = await Hive.openBox('films');
 
@@ -23,10 +35,11 @@ Future<Film?> getFilmById(num id) async {
   }
 
   var apiFilm = await FilmService().getFilmById(id);
-  if (films.length < await getMaxNumberOfFilms()) {
-    await box.close();
-    await addFilm(apiFilm);
+  await box.close();
+  if (films.length >= await getMaxNumberOfFilms()) {
+    await deleteFirstFilm();
   }
+  await addFilm(apiFilm);
 
   return Film.fromApi(apiFilm);
 }
@@ -34,15 +47,18 @@ Future<Film?> getFilmById(num id) async {
 Future<void> setMaxNumberOfFilms(num number) async {
   var box = await Hive.openBox('films');
   await box.put("maxNumberOfFilms", number);
+  await box.close();
 }
 
 Future<num> getMaxNumberOfFilms() async {
   var box = await Hive.openBox('films');
   num number = box.get("maxNumberOfFilms", defaultValue: 100);
+  await box.close();
   return number;
 }
 
-num countFilms() {
-  var box = Hive.box<Film>('films');
-  return box.length;
+Future<void> clearFilms() async {
+  var box = await Hive.openBox('films');
+  await box.delete('filmsData');
+  await box.close();
 }

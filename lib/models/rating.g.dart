@@ -17,9 +17,9 @@ class RatingAdapter extends TypeAdapter<Rating> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Rating(
-      kp: fields[0] as double,
-      imdb: fields[1] as double,
-      tmdb: fields[2] as double,
+      kp: fields[0] as num,
+      imdb: fields[1] as num,
+      tmdb: fields[2] as num,
     );
   }
 

@@ -21,9 +21,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MovApp',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Colors.grey.shade900, foregroundColor: Colors.white),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.grey.shade900,
+            selectedItemColor: Colors.blueAccent,
+            unselectedItemColor: Colors.white),
+        scaffoldBackgroundColor: Colors.black,
+        // primaryColor: Colors.black26,
+        // appBarTheme: Colors.lightGreen,
+        primaryTextTheme: Typography(platform: TargetPlatform.iOS).white,
+        textTheme: Typography(platform: TargetPlatform.iOS).white,
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -33,7 +43,8 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.indigo,
+
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: BtmNavBar(),

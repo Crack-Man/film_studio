@@ -32,12 +32,12 @@ class FilmApi {
   factory FilmApi.fromJson(Map<String, dynamic> json) {
     return FilmApi(
       id: json['id'],
-      name: json['name'] ?? "",
-      description: json['description'] ?? "",
+      name: json['name'],
+      description: json['description'],
       year: json['year'],
       rating: RatingApi.fromJson(json['rating']),
-      poster: json["poster"]["url"] ?? "",
-      logo: json["logo"]["url"] ?? "",
+      poster: json["poster"]["url"],
+      logo: json["logo"]["url"],
       genres: GenreApi.fromArray(json["genres"]),
       movieLength: json["movieLength"] ?? -1,
       ageRating: json["ageRating"] ?? -1,
@@ -90,9 +90,9 @@ class FilmService {
       final data = jsonDecode(response.body);
       final List<FilmApi> actors = [];
 
-      final idx = data['total'] > 4 ? 4 : data['total'];
+      // final idx = data['total'] > 5 ? 5 : data['total'];
 
-      for (var i = 0; i < idx; i++) {
+      for (var i = 0; i < 2; i++) {
         final entry = data['docs'][i];
         actors.add(FilmApi.fromJson(entry));
       }

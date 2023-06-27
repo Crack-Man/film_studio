@@ -16,16 +16,16 @@ class _HomePageState extends State<HomePage> {
   late Future<FilmApi> film;
 
   void printActors() async {
-    // var actors = await ActorService().getActors("Антон");
-    // print(actors[0].name);
-    // print(actors[0].movies);
+    var actors = await ActorService().getActors("Антон");
+    print(actors[0].name);
+    print(actors[0].movies);
   }
 
   @override
   void initState() {
     super.initState();
     futureFilms = FilmService().getFilms(20);
-    // printActors();
+    printActors();
   }
 
   @override
