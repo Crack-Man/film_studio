@@ -1,25 +1,30 @@
 import 'package:film_studio/api/actor_api.dart';
-import 'package:film_studio/pages/recommend_got_film.dart';
+import 'package:film_studio/pages/recommend_got_author.dart';
+import 'package:film_studio/pages/recommend_page_start.dart';
 import 'package:flutter/material.dart';
+import 'package:film_studio/api/searc_film_api.dart';
 
-class SearchPage extends StatefulWidget {
+import '../api/simular_api.dart';
+
+List<SimularsApi> Simular = [];
+
+class GetFilm extends StatefulWidget {
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _GetFilm createState() => _GetFilm();
 }
 
-num best_actor = 0; /////////////////////////////////////////////////////////////////////////////////////
 
 
-class _SearchPageState extends State<SearchPage> {
+class _GetFilm extends State<GetFilm> {
   final TextEditingController _searchController = TextEditingController();
   String _searchText = '';
-  late Future<List<ActorApi>> futureActors;
-  late Future<ActorApi> actor;
+  late Future<List<Films>> futureActors;
+  late Future<Films> actor;
 
   @override
   void initState() {
     super.initState();
-    futureActors = ActorService().getActors('пол');
+    futureActors = FilmService().getFilm('Человек');
   }
 
   @override
@@ -48,7 +53,7 @@ class _SearchPageState extends State<SearchPage> {
                   _searchText = text;
                   // futureActors = FilmService().getFilms(10);
 
-                  futureActors = ActorService().getActors(_searchText);
+                  futureActors = FilmService().getFilm(_searchText);
 
                   // print(futureActors);
                 });
@@ -56,25 +61,28 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           Expanded(/*child:Text('wow'),*/
-            child: FutureBuilder<List<ActorApi>>(
+            child: FutureBuilder<List<Films>>(
               future: futureActors,
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return ListView.separated(
                       itemBuilder: (context, index) {
-                        ActorApi film = snapshot.data?[index];
+                        Films film = snapshot.data?[index];
                         return InkWell(
                             child: ListTile(
                               title: Text(film.name),
                               onTap: (){
-                                best_actor = film.id;
-                                print(film.id);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => GetFilm()),
-                                );
-                                // print(film.name);
+                                print(film.name);
+                                print(film.simulars[0].id);
+                                print('\n');
+                                print(film.simulars[1].id);
+                                Simular = film.simulars;
 
+
+
+                                print(Simular);
+                                print(best_actor);
+                                print(selectedOptions);
                               },
                               // subtitle: Padding(
                               //   padding: const EdgeInsets.only(top: 8.0),
@@ -110,17 +118,17 @@ class _SearchPageState extends State<SearchPage> {
               },
             ),
 
-              // child: ListView.builder(
-              //   // itemCount: _searchText == 'flutter' ? 5 : 0,
-              //   itemCount: 5,
-              //
-              // itemBuilder: (context, index) {
-              //     return ListTile(
-              //         // FilmApi actor = snapshot.data?[index];
-              //       title: Text(futureActors['name']),
-              //     );
-              //   },
-              // ),
+            // child: ListView.builder(
+            //   // itemCount: _searchText == 'flutter' ? 5 : 0,
+            //   itemCount: 5,
+            //
+            // itemBuilder: (context, index) {
+            //     return ListTile(
+            //         // FilmApi actor = snapshot.data?[index];
+            //       title: Text(futureActors['name']),
+            //     );
+            //   },
+            // ),
             // ),
           ),
         ],

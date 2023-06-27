@@ -5,30 +5,31 @@ import 'package:film_studio/config/config.dart';
 
 import 'simular_api.dart';
 
-class ActorApi {
+class Films {
   final num id;
+  // final num id;
   final String name;
-  final String movies;
+  final List<SimularsApi> simulars;
+  // final List<SimularsApi> simulars;
 
 
-  const ActorApi(
+  const Films(
       {required this.id,
         required this.name,
-        required this.movies
+        required this.simulars
       });
 
-  factory ActorApi.fromJson(Map<String, dynamic> json) {
-    return ActorApi(
-      id: json['id'] ?? "",
-      name: json['name'] ?? "",
-      movies: json['movies'] ?? "",
+  factory Films.fromJson(Map<String, dynamic> json) {
+    return Films(
+        id: json['id'] ?? "",
+        name: json['name'] ?? "",
+        simulars: SimularsApi.fromArray(json["similarMovies"])
+
     );
   }
 }
 
-
-
-class ActorService {
+class FilmService {
   Map<String, String> get requestHeaders => {
     "Accept": "application/json",
     'X-API-KEY': AppConfig.apiKey
@@ -36,34 +37,35 @@ class ActorService {
 
 
   // для реков запрос
-  Future<List<ActorApi>> getActors(String name) async {
+
+
+
+
+  Future<List<Films>> getFilm(String name) async {
     Map<String, String> queryParameters = {
+      // "selectFields" : "similarMovies",
       "name": name,
     };
     String queryString = Uri(queryParameters: queryParameters).query;
     final response = await http.get(
-        Uri.parse("https://api.kinopoisk.dev/v1/person?$queryString"),
+        // Uri.parse("https://api.kinopoisk.dev/v1.3/movie?$queryString"),
+        Uri.parse("https://api.kinopoisk.dev/v1.3/movie?selectFields=similarMovies&selectFields=name&selectFields=id&$queryString"),
         headers: requestHeaders);
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      final List<ActorApi> actors = [];
+      final List<Films> films = [];
 
       // final idx = data['total'] > 5 ? 5 : data['total'];
 
       for (var i = 0; i < 2; i++) {
         final entry = data['docs'][i];
-        actors.add(ActorApi.fromJson(entry));
+        films.add(Films.fromJson(entry));
       }
-      return actors;
+      return films;
     } else {
       throw Exception('HTTP Failed');
     }
   }
-
-
-
-
-
 
 
 

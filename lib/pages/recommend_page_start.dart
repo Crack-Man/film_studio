@@ -6,6 +6,9 @@ class SurveyPage extends StatefulWidget {
   _SurveyPageState createState() => _SurveyPageState();
 }
 
+List<String> selectedOptions = [];
+
+
 class _SurveyPageState extends State<SurveyPage> {
   List<String> _options = ['Комедии', 'Мультфильмы', 'Ужасы', 'Фантастика', 'Триллеры', 'Боевики', 'Мелодраммы',
                           'Детективы', 'Приключения', 'Фэнтези', 'Военные', 'Семейные', 'Аниме', 'Исторические',
@@ -64,7 +67,7 @@ class _SurveyPageState extends State<SurveyPage> {
             child: ElevatedButton(
               child: Text('Далее'),
               onPressed: () {
-                List<String> selectedOptions = [];
+                // List<String> selectedOptions = [];##########################################################################
 
                 for (int i = 0; i < _options.length; i++) {
                   if (_selected[i]) {
