@@ -19,7 +19,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    futureActors = ActorService().getActors('пол');
+    futureActors = ActorService().getActors('Леонардо ди');
   }
 
   @override

@@ -1,12 +1,23 @@
 import 'package:film_studio/api/actor_api.dart';
 import 'package:film_studio/pages/recommend_got_author.dart';
 import 'package:film_studio/pages/recommend_page_start.dart';
+import 'package:film_studio/pages/rercomendation.dart';
 import 'package:flutter/material.dart';
 import 'package:film_studio/api/searc_film_api.dart';
+import 'package:film_studio/api/rec_api.dart';
+
+// import 'make';
+// import 'make_recs_api.dart';
+
+// final List<recsApi> recs = [];
+
+
 
 import '../api/simular_api.dart';
 
-List<SimularsApi> Simular = [];
+bool init_rec = false;
+
+List<int> Simular = [];
 
 class GetFilm extends StatefulWidget {
   @override
@@ -72,17 +83,34 @@ class _GetFilm extends State<GetFilm> {
                             child: ListTile(
                               title: Text(film.name),
                               onTap: (){
-                                print(film.name);
-                                print(film.simulars[0].id);
-                                print('\n');
-                                print(film.simulars[1].id);
-                                Simular = film.simulars;
 
+                                for (var item in film.simulars){
+                                  Simular.add(item.id);
+                                }
+                                // film.simulars.map((e) => Simular.add(e.id));
+                                // print(Simular);
+                                //
+                                // Simular.add(film.simulars[0].id);
+                                // print(Simular);
+                                // print(film.name);
+                                // print(film.simulars[0].id);
+                                // print('\n');
+                                // print(film.simulars[1].id);
+                                // Simular = film.simulars.id;
+                                // film.simulars.every((element) => element);
 
+                                film.simulars.map((e) => Simular.add(e.id));
+                                 // recsService().MakeAllReq(selectedOptions,best_actor,Simular);
+                                // rec
 
-                                print(Simular);
+                                // print(Simular['id']);
                                 print(best_actor);
                                 print(selectedOptions);
+                                init_rec = true;
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => RecsPage()),
+                                );
                               },
                               // subtitle: Padding(
                               //   padding: const EdgeInsets.only(top: 8.0),

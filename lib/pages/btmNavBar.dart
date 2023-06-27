@@ -1,9 +1,11 @@
+import 'package:film_studio/pages/recommend_got_film.dart';
+import 'package:film_studio/pages/rercomendation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:film_studio/pages/search_page.dart';
 import 'home_page.dart';
 import 'recommend_page_start.dart';
-
+import 'package:film_studio/api/rec_api.dart';
 
 
 class BtmNavBar extends StatefulWidget {
@@ -20,11 +22,27 @@ class _BtmNavBarState extends State<BtmNavBar> {
     HomePage(),
     SearchScreen(),
     SurveyPage(),
+    // RecsPage(),
+
+
+    // if(init_rec==false){
+    //   SurveyPage(),
+    // } else{
+    //   RecsPage(),
+    // }
+
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      // print(_selectedIndex);
+      // print(init_rec);
+      // if (_selectedIndex == 2){
+      //   if(init_rec==true){
+      //     _selectedIndex = 3;
+      //   }
+      // }
     });
   }
 
