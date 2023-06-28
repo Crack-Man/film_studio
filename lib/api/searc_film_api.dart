@@ -56,8 +56,9 @@ class FilmService {
       final List<Films> films = [];
 
       // final idx = data['total'] > 5 ? 5 : data['total'];
+      final idx = data['total'] > 5 ? 5 : data['total'];
 
-      for (var i = 0; i < 2; i++) {
+      for (var i = 0; i < idx; i++) {
         final entry = data['docs'][i];
         films.add(Films.fromJson(entry));
       }

@@ -8,23 +8,58 @@ class SurveyPage extends StatefulWidget {
 
 List<String> selectedOptions = [];
 
-
 class _SurveyPageState extends State<SurveyPage> {
-  List<String> _options = ['комедия', 'мультфильм', 'ужасы', 'фантастика', 'триллер', 'боевик', 'мелодрама',
-    'детектив', 'приключения', 'фэнтези', 'военный', 'семейный', 'аниме', 'история',
-    'драма', 'документальный', 'Детские', 'криминал', 'биография', 'вестерн'];
-  List<bool> _selected = [false, false, false, false, false, false, false,
-    false, false, false, false, false, false, false,
-    false, false, false, false, false, false] ;
+  List<String> _options = [
+    'комедия',
+    'мультфильм',
+    'ужасы',
+    'фантастика',
+    'триллер',
+    'боевик',
+    'мелодрама',
+    'детектив',
+    'приключения',
+    'фэнтези',
+    'военный',
+    'семейный',
+    'аниме',
+    'история',
+    'драма',
+    'документальный',
+    'детские',
+    'криминал',
+    'биография',
+    'вестерн'
+  ];
+  List<bool> _selected = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
 
   int _maxSelected = 5;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // title: Text('Survey Page'),
-      ),
+//      appBar: AppBar(),
       body: Column(
         children: <Widget>[
           Padding(
@@ -45,10 +80,9 @@ class _SurveyPageState extends State<SurveyPage> {
                     setState(() {
                       {
                         if (value == true) {
-                          // Проверяем, сколько уже выбрано элементов
-                          int selectedCount = _selected.where((element) => element == true).length;
-
-                          // Если не достигнут лимит, выбираем этот элемент
+                          int selectedCount = _selected
+                              .where((element) => element == true)
+                              .length;
                           if (selectedCount < _maxSelected) {
                             _selected[index] = true;
                           }
@@ -56,7 +90,8 @@ class _SurveyPageState extends State<SurveyPage> {
                           // Снимаем выбор с элемента
                           _selected[index] = false;
                         }
-                      }});
+                      }
+                    });
                   },
                 );
               },
@@ -67,24 +102,18 @@ class _SurveyPageState extends State<SurveyPage> {
             child: ElevatedButton(
               child: Text('Далее'),
               onPressed: () {
-                // List<String> selectedOptions = [];##########################################################################
-
                 for (int i = 0; i < _options.length; i++) {
                   if (_selected[i]) {
                     selectedOptions.add(_options[i]);
                   }
                 }
 
-                // @override
-                // createState() => SearchFilm();
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SearchPage()),
                 );
-                // (context) => SearchFilm();
-                // Do something with the selected options
-                print('Selected options: $selectedOptions');
 
+                print('Selected options: $selectedOptions');
               },
             ),
           ),

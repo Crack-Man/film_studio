@@ -40,7 +40,7 @@ class _SearchScreen extends State<SearchScreen> {
     return Scaffold(
       body: Column(children: [
         Padding(
-            padding: const EdgeInsets.only(top: 20.0, left:10, right: 10),
+            padding: const EdgeInsets.only(top: 20.0, left: 10, right: 10),
             child: TextField(
               controller: _controller,
               decoration: InputDecoration(
@@ -73,7 +73,11 @@ class _SearchScreen extends State<SearchScreen> {
           future: _futureFilms,
           builder: (context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator()));
+              return const Center(
+                  child: SizedBox(
+                      width: 30,
+                      height: 30,
+                      child: CircularProgressIndicator()));
             } else if (snapshot.hasError) {
               return Text('ERROR: ${snapshot.error}');
             } else if (snapshot.data == null || !snapshot.data.isNotEmpty) {

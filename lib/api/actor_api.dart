@@ -48,7 +48,7 @@ class ActorService {
       final data = jsonDecode(response.body);
       final List<ActorApi> actors = [];
 
-      final idx = data['total'] > 4 ? 4 : data['total'];
+      final idx = data['total'] > 5 ? 5 : data['total'];
 
       for (var i = 0; i < idx; i++) {
         final entry = data['docs'][i];

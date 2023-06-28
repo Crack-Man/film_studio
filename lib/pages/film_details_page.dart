@@ -96,79 +96,9 @@ class _FilmDetailsPageState extends State<FilmDetailsPage> {
                               .textTheme
                               .bodySmall!
                               .copyWith(height: 1.75, color: Colors.white))
-
-                      // Align(
-                      //     alignment: Alignment.center,
-                      //     child: Text(film.name, style: textStyleHeader)),
-                      // // Padding(
-                      // //     padding: const EdgeInsets.only(top: 8.0),
-                      // //     child: ),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text(film.description, style: textStyle)),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text("Год: ${film.year}", style: textStyle)),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text("Длительность: ${film.movieLength} минут", style: textStyle)),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text("Возрастной рейтинг: ${film.ageRating}+", style: textStyle)),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text("Жанр: ${genres}", style: textStyle)),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text("Жанр: ${genres}", style: textStyle)),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text("KP: ${film.rating.kp}", style: textStyle)),
-                      // Padding(
-                      //     padding: const EdgeInsets.only(top: 8.0),
-                      //     child: Text("IMDB: ${film.rating.imdb}", style: textStyle)),
-                      // if (film.rating.tmdb != 0)
-                      //   Padding(
-                      //       padding: const EdgeInsets.only(top: 8.0),
-                      //       child: Text("TMDB: ${film.rating.tmdb}", style: textStyle)),
                     ]),
                   ),
                 )
-                //
-                // Align(
-                //     alignment: Alignment.center,
-                //     child: Text(film.name, style: textStyleHeader)),
-                // // Padding(
-                // //     padding: const EdgeInsets.only(top: 8.0),
-                // //     child: ),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text(film.description, style: textStyle)),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text("Год: ${film.year}", style: textStyle)),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text("Длительность: ${film.movieLength} минут", style: textStyle)),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text("Возрастной рейтинг: ${film.ageRating}+", style: textStyle)),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text("Жанр: ${genres}", style: textStyle)),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text("Жанр: ${genres}", style: textStyle)),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text("KP: ${film.rating.kp}", style: textStyle)),
-                // Padding(
-                //     padding: const EdgeInsets.only(top: 8.0),
-                //     child: Text("IMDB: ${film.rating.imdb}", style: textStyle)),
-                // if (film.rating.tmdb != 0)
-                //   Padding(
-                //       padding: const EdgeInsets.only(top: 8.0),
-                //       child: Text("TMDB: ${film.rating.tmdb}", style: textStyle)),
               ],
             ));
           } else {
@@ -203,32 +133,6 @@ class _FilmDetailsPageState extends State<FilmDetailsPage> {
       },
     );
   }
-
-// Widget buildFilmDetail(String label, String value) {
-//   return Padding(
-//     padding: const EdgeInsets.all(8.0),
-//     child: RichText(
-//       text: TextSpan(
-//         style: DefaultTextStyle.of(context).style,
-//         children: [
-//           TextSpan(
-//             text: label != "" ? '$label: ' : '',
-//             style: const TextStyle(
-//               fontWeight: FontWeight.bold,
-//               color: Colors.black,
-//             ),
-//           ),
-//           TextSpan(
-//             text: value,
-//             style: TextStyle(
-//               color: Colors.grey[600],
-//             ),
-//           ),
-//         ],
-//       ),
-//     ),
-//   );
-// }
 }
 
 List<Widget> _buildBackground(context, film) {

@@ -28,48 +28,26 @@ class _RecsPage extends State<RecsPage> {
   final btmNavBarPages2 = [
     HomePage(),
     SearchScreen(),
-    //SurveyPage(),
     RecommendBody(),
-
-    // if(init_rec==false){
-    //   SurveyPage(),
-    // } else{
-    //   RecsPage(),
-    // }
   ];
 
   void _onItemTapped2(int index) {
     setState(() {
       print(index);
       _selectedIndex2 = index;
-      // print(_selectedIndex);
-      // print(init_rec);
-      // if (_selectedIndex == 2){
-      //   if(init_rec==true){
-      //     _selectedIndex = 3;
-      //   }
-      // }
     });
   }
-
-  // void printActors() async {
-  //   recsService().MakeAllReq(selectedOptions,best_actor,Simular);
-  //
-  //   var actors = await ActorService().getActors("Антон");
-  //   print(actors[0].name);
-  //   print(actors[0].movies);
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Recs page")),
+      appBar: AppBar(title: const Text("MovApp")),
       body: btmNavBarPages2.elementAt(_selectedIndex2),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'PlaceHolder',
+            label: 'Популярные',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
@@ -101,15 +79,13 @@ class _RecommendBody extends State<RecommendBody> {
   @override
   void initState() {
     super.initState();
-    // futureRec = recsService().getFilmsByActorId(best_actor);
+
     futureRec = recsService().MakeAllReq(selectedOptions, best_actor, Simular);
-    // printActors();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text("Recs page")),
       body: Center(
         child: FutureBuilder<List<FilmApi>>(
           future: futureRec,
@@ -131,7 +107,7 @@ class _RecommendBody extends State<RecommendBody> {
                           subtitle: Padding(
                             padding: const EdgeInsets.only(top: 8.0),
                             child: Text(
-                              film.description,
+                              '${film.year} г. | Жанр: ${capitalize(film.genres[0].name)}',
                               softWrap: true,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -146,7 +122,7 @@ class _RecommendBody extends State<RecommendBody> {
                               maxHeight: 64,
                             ),
                             child:
-                            Image.network(film.poster, fit: BoxFit.cover),
+                                Image.network(film.poster, fit: BoxFit.cover),
                           ),
                         ));
                   },

@@ -12,7 +12,6 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreen extends State<SettingsScreen> {
   late Future<num> _currentSliderPrimaryValue = getMaxNumberOfFilms();
-  // double _currentSliderSecondaryValue = 0.5;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,8 @@ class _SettingsScreen extends State<SettingsScreen> {
                           onPressed: (context) => _showResetCashDialog(context),
                         ),
                         SettingsTile(
-                          title: const Text('Установить количество хранимых данных'),
+                          title: const Text(
+                              'Установить количество хранимых данных'),
                           value: Text(
                               'Текущее количество хранимых данных ${value}'),
                         ),
@@ -81,7 +81,8 @@ void _showResetRecommendationsDialog(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: const Text('Внимание!', style: TextStyle(color: Colors.black)),
-        content: const Text("Сбросить рекомендации? Это действие необратимо!", style: TextStyle(color: Colors.black)),
+        content: const Text("Сбросить рекомендации? Это действие необратимо!",
+            style: TextStyle(color: Colors.black)),
         actions: <Widget>[
           TextButton(
             child: const Text("Отмена", style: TextStyle(color: Colors.black)),
@@ -90,7 +91,8 @@ void _showResetRecommendationsDialog(BuildContext context) {
             },
           ),
           TextButton(
-            child: const Text("Сбросить рекомендации", style: TextStyle(color: Colors.black)),
+            child: const Text("Сбросить рекомендации",
+                style: TextStyle(color: Colors.black)),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -107,7 +109,8 @@ void _showResetCashDialog(BuildContext context) {
     builder: (BuildContext context) {
       return AlertDialog(
         title: const Text("Внимание!", style: TextStyle(color: Colors.black)),
-        content: const Text('Очистить кэш? Это действие необратимо!', style: TextStyle(color: Colors.black)),
+        content: const Text('Очистить кэш? Это действие необратимо!',
+            style: TextStyle(color: Colors.black)),
         actions: <Widget>[
           TextButton(
             child: const Text("Отмена", style: TextStyle(color: Colors.black)),
@@ -116,7 +119,8 @@ void _showResetCashDialog(BuildContext context) {
             },
           ),
           TextButton(
-            child: const Text("Очистить кэш", style: TextStyle(color: Colors.black)),
+            child: const Text("Очистить кэш",
+                style: TextStyle(color: Colors.black)),
             onPressed: () {
               clearFilms();
               Navigator.of(context).pop();

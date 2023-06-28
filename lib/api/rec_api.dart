@@ -47,12 +47,7 @@ class recsApi {
   }
 }
 
-// 1 по жанрам
 
-// 2 по id
-
-// 3 по актёру
-// final List<recsApi> recs = [];
 
 class recsService {
   Map<String, String> get requestHeaders => {
@@ -72,23 +67,15 @@ class recsService {
 
     late Future<List<FilmApi>> futureFilms3;
 
-    // final List<recsApi> recs = [];
 
     futureFilms1 = getByGenre(genre);
-    // futureFilms2 = getByGenre(genre);
+
     futureFilms2 = getFilmById(ids);
-    // futureFilms = getFilmById(id);
-    // print(ids);
+
     futureFilms3 = getFilmsByActorId(id);
     Future<List<FilmApi>> resultList = concatLists(futureFilms1, futureFilms2);
     Future<List<FilmApi>> resultList0 = concatLists(resultList, futureFilms3);
 
-    // final mergedList = await Future.wait([futureFilms1,futureFilms2,futureFilms3]);
-
-    // for (final FilmApi item in futureFilms1){
-    //
-    // }
-    // print(recs.length);
     return resultList0;
 
   }
@@ -97,29 +84,32 @@ class recsService {
   Future<List<FilmApi>> concatLists(Future<List<FilmApi>> firstList, Future<List<FilmApi>> secondList) async {
     List<FilmApi> resultList = [];
 
-    // Wait for the first list to resolve and add its elements to the result list
+
     await firstList.then((list) => resultList.addAll(list));
 
-    // Wait for the second list to resolve and add its elements to the result list
+
     await secondList.then((list) => resultList.addAll(list));
 
-    // Return the concatenated list
+
     return resultList;
   }
 
 
 // ЖАНРЫ
   Future<List<FilmApi>> getByGenre(List<String> genre) async {
-  // void getByGenre(List<String> genre) async {
+
     final List<FilmApi> recs = [];
 
     for (var item in genre){
       Map<String, String> queryParameters = {
-        "genre": item,
+        "genres.name": item,
       };
-      String queryString = Uri(queryParameters: queryParameters).query;
+
+
+      String qS = Uri(queryParameters: queryParameters).query;
+      print(qS);
       final response = await http.get(
-          Uri.parse("https://api.kinopoisk.dev/v1.3/movie?page=1&limit=10$queryString"),
+          Uri.parse("https://api.kinopoisk.dev/v1.3/movie?$qS"),
           headers: requestHeaders);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -137,12 +127,12 @@ class recsService {
 
 // ПОХОЖИЕ ФИЛЬМЫ
   Future<List<FilmApi>> getFilmById(List<num> ids) async {
-  // void getFilmById(List<num> ids) async {
+
     final List<FilmApi> recs = [];
 
     for (var id in ids){
       final response = await http.get(
-        // Uri.parse("https://api.kinopoisk.dev/v1.3/movie?persons.id=$id"),
+
           Uri.parse("https://api.kinopoisk.dev/v1.3/movie/$id"),
           headers: requestHeaders);
       if (response.statusCode == 200) {
@@ -157,11 +147,10 @@ class recsService {
   }
 
 // АКТЁР
-//   final List<recsApi> recs = [];
 
 
   Future<List<FilmApi>> getFilmsByActorId(num id) async {
-  // void getFilmsByActorId(num id) async {
+
     final List<FilmApi> recs = [];
 
     final response = await http.get(
@@ -183,22 +172,3 @@ class recsService {
     }
     return recs;
   }}
-
-// // Future<List<recsApi>> getFilmsByActorId(num id) async {
-// void getFilmsByActorId(num id) async {
-//
-//   final response = await http.get(
-//       Uri.parse("https://api.kinopoisk.dev/v1.3/movie?persons.id=$id"),
-//       headers: requestHeaders);
-//   if (response.statusCode == 200) {
-//     final data = jsonDecode(response.body);
-//
-//     for (var i = 0; i < 2; i++) {
-//       final entry = data['docs'][i];
-//       recs.add(recsApi.fromJson(entry));
-//     }
-//   } else {
-//     throw Exception('HTTP Failed');
-//   }
-//   // return recs;
-// }}

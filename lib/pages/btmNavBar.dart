@@ -9,7 +9,6 @@ import 'home_page.dart';
 import 'recommend_page_start.dart';
 import 'package:film_studio/api/rec_api.dart';
 
-
 class BtmNavBar extends StatefulWidget {
   BtmNavBar({Key? key}) : super(key: key);
 
@@ -24,27 +23,11 @@ class _BtmNavBarState extends State<BtmNavBar> {
     HomePage(),
     const SearchScreen(),
     SurveyPage(),
-    // RecsPage(),
-
-
-    // if(init_rec==false){
-    //   SurveyPage(),
-    // } else{
-    //   RecsPage(),
-    // }
-
   ];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      // print(_selectedIndex);
-      // print(init_rec);
-      // if (_selectedIndex == 2){
-      //   if(init_rec==true){
-      //     _selectedIndex = 3;
-      //   }
-      // }
     });
   }
 
@@ -72,7 +55,7 @@ class _BtmNavBarState extends State<BtmNavBar> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'PlaceHolder',
+            label: 'Популярные',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
