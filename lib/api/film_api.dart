@@ -49,13 +49,8 @@ class FilmApi {
       description: json['description'] ?? "",
       year: json['year'],
       rating: RatingApi.fromJson(json['rating']),
-<<<<<<<<< Temporary merge branch 1
       poster: posterURL,
       logo: logoURL,
-=========
-      poster: json["poster"]["url"] ?? "",
-      logo: json["logo"]["url"] ?? "",
->>>>>>>>> Temporary merge branch 2
       genres: GenreApi.fromArray(json["genres"]),
       movieLength: json["movieLength"] ?? -1,
       ageRating: json["ageRating"] ?? -1,

@@ -11,7 +11,7 @@ import 'recommend_got_film.dart';
 import 'recommend_got_author.dart';
 import 'recommend_page_start.dart';
 
-import '';
+// import '';
 
 class RecsPage extends StatefulWidget {
   RecsPage({Key? key}) : super(key: key);
@@ -146,7 +146,7 @@ class _RecommendBody extends State<RecommendBody> {
                               maxHeight: 64,
                             ),
                             child:
-                                Image.network(film.poster, fit: BoxFit.cover),
+                            Image.network(film.poster, fit: BoxFit.cover),
                           ),
                         ));
                   },

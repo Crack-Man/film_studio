@@ -11,17 +11,20 @@ List<String> selectedOptions = [];
 
 class _SurveyPageState extends State<SurveyPage> {
   List<String> _options = ['комедия', 'мультфильм', 'ужасы', 'фантастика', 'триллер', 'боевик', 'мелодрама',
-                          'детектив', 'приключения', 'фэнтези', 'военный', 'семейный', 'аниме', 'история',
-                          'драма', 'документальный', 'Детские', 'криминал', 'биография', 'вестерн'];
+    'детектив', 'приключения', 'фэнтези', 'военный', 'семейный', 'аниме', 'история',
+    'драма', 'документальный', 'Детские', 'криминал', 'биография', 'вестерн'];
   List<bool> _selected = [false, false, false, false, false, false, false,
-                          false, false, false, false, false, false, false,
-                          false, false, false, false, false, false] ;
+    false, false, false, false, false, false, false,
+    false, false, false, false, false, false] ;
 
   int _maxSelected = 5;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        // title: Text('Survey Page'),
+      ),
       body: Column(
         children: <Widget>[
           Padding(
@@ -41,19 +44,19 @@ class _SurveyPageState extends State<SurveyPage> {
                   onChanged: (bool? value) {
                     setState(() {
                       {
-                      if (value == true) {
-                      // Проверяем, сколько уже выбрано элементов
-                      int selectedCount = _selected.where((element) => element == true).length;
+                        if (value == true) {
+                          // Проверяем, сколько уже выбрано элементов
+                          int selectedCount = _selected.where((element) => element == true).length;
 
-                      // Если не достигнут лимит, выбираем этот элемент
-                      if (selectedCount < _maxSelected) {
-                      _selected[index] = true;
-                      }
-                      } else {
-                      // Снимаем выбор с элемента
-                      _selected[index] = false;
-                      }
-                    }});
+                          // Если не достигнут лимит, выбираем этот элемент
+                          if (selectedCount < _maxSelected) {
+                            _selected[index] = true;
+                          }
+                        } else {
+                          // Снимаем выбор с элемента
+                          _selected[index] = false;
+                        }
+                      }});
                   },
                 );
               },

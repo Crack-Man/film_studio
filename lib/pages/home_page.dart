@@ -15,23 +15,10 @@ class _HomePageState extends State<HomePage> {
   late Future<List<FilmApi>> futureFilms;
   late Future<FilmApi> film;
 
-<<<<<<<<< Temporary merge branch 1
-=========
-  void printActors() async {
-    // var actors = await ActorService().getActors("Антон");
-    // print(actors[0].name);
-    // print(actors[0].movies);
-  }
-
->>>>>>>>> Temporary merge branch 2
   @override
   void initState() {
     super.initState();
     futureFilms = FilmService().getFilms(20);
-<<<<<<<<< Temporary merge branch 1
-=========
-    // printActors();
->>>>>>>>> Temporary merge branch 2
   }
 
   @override

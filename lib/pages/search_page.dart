@@ -65,7 +65,6 @@ class _SearchScreen extends State<SearchScreen> {
                 color: Colors.black, // Set the desired text color
               ),
               onSubmitted: (String value) async {
-                print(value);
                 updateData(value);
               },
             )),
@@ -73,8 +72,6 @@ class _SearchScreen extends State<SearchScreen> {
             child: FutureBuilder<List<FilmApi>>(
           future: _futureFilms,
           builder: (context, AsyncSnapshot snapshot) {
-            print("object!!!!!!!!!!!");
-            print(snapshot);
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: SizedBox(width: 30, height: 30, child: CircularProgressIndicator()));
             } else if (snapshot.hasError) {
@@ -82,10 +79,8 @@ class _SearchScreen extends State<SearchScreen> {
             } else if (snapshot.data == null || !snapshot.data.isNotEmpty) {
               return const Text("");
             }
-            print(snapshot.data);
             return ListView.separated(
                 itemBuilder: (context, index) {
-                  print(snapshot.data);
                   FilmApi film = snapshot.data?[index];
                   return InkWell(
                       onTap: () {
