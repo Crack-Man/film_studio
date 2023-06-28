@@ -33,13 +33,13 @@ class recsApi {
 
   factory recsApi.fromJson(Map<String, dynamic> json) {
     return recsApi(
-      id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      year: json['year'],
+      id: json['id'] ?? "",
+      name: json['name'] ?? "",
+      description: json['description'] ?? "",
+      year: json['year'] ?? "",
       rating: RatingApi.fromJson(json['rating']),
-      poster: json["poster"]["url"],
-      logo: json["logo"]["url"],
+      poster: json["poster"]["url"] ?? "",
+      logo: json["logo"]["url"] ?? "",
       genres: GenreApi.fromArray(json["genres"]),
       movieLength: json["movieLength"] ?? -1,
       ageRating: json["ageRating"] ?? -1,

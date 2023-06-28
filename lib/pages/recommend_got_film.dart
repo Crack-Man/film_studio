@@ -100,7 +100,7 @@ class _GetFilm extends State<GetFilm> {
                                 // film.simulars.every((element) => element);
 
                                 film.simulars.map((e) => Simular.add(e.id));
-                                 // recsService().MakeAllReq(selectedOptions,best_actor,Simular);
+                                // recsService().MakeAllReq(selectedOptions,best_actor,Simular);
                                 // rec
 
                                 // print(Simular['id']);

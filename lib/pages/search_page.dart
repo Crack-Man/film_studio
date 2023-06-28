@@ -31,7 +31,7 @@ class _SearchScreen extends State<SearchScreen> {
 
   void updateData(String value) {
     setState(() {
-      _futureFilms = FilmService().getFilms(20, name: value);
+      _futureFilms = FilmService().getFilms(20);
     });
   }
 
@@ -100,7 +100,7 @@ class _SearchScreen extends State<SearchScreen> {
                         subtitle: Padding(
                           padding: const EdgeInsets.only(top: 8.0),
                           child: Text(
-                            '${film.year} г. | Жанр: ${capitalize(film.genres[0].name)}',
+                            '${film.year} г. | Жанр: ${(film.genres[0].name)}',
                             softWrap: true,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

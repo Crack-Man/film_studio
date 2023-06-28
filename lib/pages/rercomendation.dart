@@ -146,7 +146,7 @@ class _RecommendBody extends State<RecommendBody> {
                               maxHeight: 64,
                             ),
                             child:
-                                Image.network(film.poster, fit: BoxFit.cover),
+                            Image.network(film.poster, fit: BoxFit.cover),
                           ),
                         ));
                   },
